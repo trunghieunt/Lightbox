@@ -9,8 +9,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Lightbox",
-            path: "Lightbox"
+            name: "Lightbox"
         )
     ]
 )
