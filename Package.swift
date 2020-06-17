@@ -8,15 +8,15 @@ let package = Package(
         .library(name: "Lightbox", targets: ["Lightbox"])
     ],
     dependencies: [
-        .package(url: "https://github.com/kientux/Imaginary.git", .upToNextMajor(from: "4.4.2")),
+        .package(url: "https://github.com/kientux/Imaginary.git", .upToNextMajor(from: "4.4.3")),
     ],
     targets: [
         .target(
             name: "Lightbox",
-            path: "Source",
             dependencies: [
                 "Imaginary",
             ],
+            path: "Source",
         )
     ]
 )
