@@ -1,11 +1,12 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.1
 import PackageDescription
 
 let package = Package(
     name: "Lightbox",
-    // platforms: [.iOS("8.0"), .macOS("10.10"), .tvOS("9.0"), .watchOS("2.0")],
     products: [
-        .library(name: "Lightbox", targets: ["Lightbox"])
+        .library(
+            name: "Lightbox",
+            targets: ["Lightbox"]),
     ],
     dependencies: [],
     targets: [
@@ -13,6 +14,7 @@ let package = Package(
             name: "Lightbox",
             dependencies: [],
             path: "Source"
-        )
-    ]
+            )
+    ],
+    swiftLanguageVersions: [.v5]
 )
