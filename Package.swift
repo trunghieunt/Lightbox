@@ -7,15 +7,11 @@ let package = Package(
     products: [
         .library(name: "Lightbox", targets: ["Lightbox"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/kientux/Imaginary.git", .upToNextMajor(from: "4.4.4")),
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "Lightbox",
-            dependencies: [
-                "Imaginary",
-            ],
+            dependencies: [],
             path: "Source"
         )
     ]
