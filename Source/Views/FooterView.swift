@@ -36,9 +36,6 @@ open class FooterView: UIView {
         button.backgroundColor = LightboxConfig.ImageButton.backgroundColor
         button.layer.cornerRadius = LightboxConfig.ImageButton.cornerRadius
         
-        button.addTarget(self, action: #selector(imageButtonDidPress(_:)),
-                         for: .touchUpInside)
-        
         if let image = LightboxConfig.ImageButton.image {
             button.setBackgroundImage(image, for: UIControl.State())
         }
@@ -134,11 +131,6 @@ open class FooterView: UIView {
 
     resizeGradientLayer()
   }
-    // MARK: - Actions
-
-    @objc func imageButtonDidPress(_ button: UIButton) {
-        LightboxConfig.ImageButton.action?()
-    }
 }
 
 // MARK: - LayoutConfigurable
