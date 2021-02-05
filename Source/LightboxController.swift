@@ -11,8 +11,9 @@ public protocol LightboxControllerDismissalDelegate: class {
 }
 
 public protocol LightboxControllerTouchDelegate: class {
-
-  func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int)
+    
+    func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int)
+    func lightboxController(_ controller: LightboxController, didTouch imageButton: UIButton)
 }
 
 open class LightboxController: UIViewController {
@@ -458,6 +459,10 @@ extension LightboxController: HeaderViewDelegate {
 // MARK: - FooterViewDelegate
 
 extension LightboxController: FooterViewDelegate {
+    public func footerView(_ footerView: FooterView, didPressImageButton imageButton: UIButton) {
+        imageTouchDelegate?.lightboxController(self, didTouch: imageButton)
+    }
+    
 
   public func footerView(_ footerView: FooterView, didExpand expanded: Bool) {
     UIView.animate(withDuration: 0.25, animations: {
