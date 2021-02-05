@@ -3,7 +3,6 @@ import UIKit
 public protocol FooterViewDelegate: class {
     
     func footerView(_ footerView: FooterView, didExpand expanded: Bool)
-    func footerView(_ footerView: FooterView, didPressImageButton imageButton: UIButton)
 }
 
 open class FooterView: UIView {
@@ -138,7 +137,7 @@ open class FooterView: UIView {
     // MARK: - Actions
 
     @objc func imageButtonDidPress(_ button: UIButton) {
-      delegate?.footerView(self, didPressImageButton: imageButton)
+        LightboxConfig.ImageButton.action?()
     }
 }
 
