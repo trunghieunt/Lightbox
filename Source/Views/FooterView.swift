@@ -33,9 +33,6 @@ open class FooterView: UIView {
             button.sizeToFit()
         }
         
-        button.backgroundColor = LightboxConfig.ImageButton.backgroundColor
-        button.layer.cornerRadius = LightboxConfig.ImageButton.cornerRadius
-        
         if let image = LightboxConfig.ImageButton.image {
             button.setBackgroundImage(image, for: UIControl.State())
         }

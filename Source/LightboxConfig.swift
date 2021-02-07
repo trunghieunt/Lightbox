@@ -103,8 +103,6 @@ public class LightboxConfig {
         public static var size: CGSize?
         public static var text = NSLocalizedString("Use as avatar", comment: "")
         public static var image: UIImage?
-        public static var cornerRadius: CGFloat = 19.0
-        public static var backgroundColor: UIColor = UIColor(hex: "#8F9096")
         
         public static var textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.boldSystemFont(ofSize: 16),
