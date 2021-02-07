@@ -14,7 +14,7 @@ open class InfoLabel: UILabel {
     return gesture
   }()
 
-  open var numberOfVisibleLines = 2
+  open var numberOfVisibleLines = 1
 
   var ellipsis: String {
     return "... \(LightboxConfig.InfoLabel.ellipsisText)"

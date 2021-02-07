@@ -82,6 +82,7 @@ open class FooterView: UIView {
   // MARK: - Helpers
 
   func expand(_ expand: Bool) {
+    self.imageButton.isHidden = !LightboxConfig.ImageButton.enabled ? true : expand
     expand ? infoLabel.expand() : infoLabel.collapse()
   }
 
@@ -127,7 +128,7 @@ open class FooterView: UIView {
       height: 0.5
     )
 
-    infoLabel.frame.origin.y = separatorView.frame.minY - infoLabel.frame.height - 15
+    infoLabel.frame.origin.y = separatorView.frame.minY - infoLabel.frame.height - 5
 
     resizeGradientLayer()
   }
@@ -138,14 +139,14 @@ open class FooterView: UIView {
 extension FooterView: LayoutConfigurable {
 
   @objc public func configureLayout() {
-    infoLabel.frame = CGRect(x: 17, y: 0, width: frame.width - 17 * 2, height: 35)
-    infoLabel.configureLayout()
-    
     let widthImageButton = imageButton.frame.width + 20
     imageButton.frame = CGRect(x: bounds.width/2 - widthImageButton/2,
-                               y: infoLabel.frame.minY - 45.5,
+                               y: 6,
                                width: widthImageButton,
                                height: 37.5)
+    
+    infoLabel.frame = CGRect(x: 17, y: 45, width: frame.width - 17 * 2, height: 35)
+    infoLabel.configureLayout()
   }
 }
 
@@ -153,6 +154,7 @@ extension FooterView: InfoLabelDelegate {
 
   public func infoLabel(_ infoLabel: InfoLabel, didExpand expanded: Bool) {
     _ = (expanded || infoLabel.fullText.isEmpty) ? removeGradientLayer() : addGradientLayer(gradientColors)
+    self.imageButton.isHidden =  !LightboxConfig.ImageButton.enabled ? true : expanded
     delegate?.footerView(self, didExpand: expanded)
   }
 }
