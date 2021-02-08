@@ -6,6 +6,12 @@ public protocol FooterViewDelegate: class {
 }
 
 open class FooterView: UIView {
+    
+    open var isImageActionEnabled = false {
+        didSet {
+            self.imageButton.isHidden = !isImageActionEnabled
+        }
+    }
 
   open fileprivate(set) lazy var infoLabel: InfoLabel = { [unowned self] in
     let label = InfoLabel(text: "")
@@ -19,26 +25,8 @@ open class FooterView: UIView {
   }()
     
     open fileprivate(set) lazy var imageButton: UIButton = { [unowned self] in
-        let title = NSAttributedString(
-            string: LightboxConfig.ImageButton.text,
-            attributes: LightboxConfig.ImageButton.textAttributes)
         
         let button = UIButton(type: .system)
-        
-        button.setAttributedTitle(title, for: UIControl.State())
-        
-        if let size = LightboxConfig.ImageButton.size {
-            button.frame.size = size
-        } else {
-            button.sizeToFit()
-        }
-        
-        if let image = LightboxConfig.ImageButton.image {
-            button.setBackgroundImage(image, for: UIControl.State())
-        }
-        
-        button.isHidden = !LightboxConfig.ImageButton.enabled
-        
         return button
     }()
 
@@ -79,7 +67,6 @@ open class FooterView: UIView {
   // MARK: - Helpers
 
   func expand(_ expand: Bool) {
-    self.imageButton.isHidden = !LightboxConfig.ImageButton.enabled ? true : expand
     expand ? infoLabel.expand() : infoLabel.collapse()
   }
 
@@ -136,7 +123,7 @@ open class FooterView: UIView {
 extension FooterView: LayoutConfigurable {
 
   @objc public func configureLayout() {
-    let widthImageButton = imageButton.frame.width + 20
+    let widthImageButton = self.imageButton.currentTitle?.widthOfString(usingFont: .systemFont(ofSize: 17.0)) ?? 0 + 20
     imageButton.frame = CGRect(x: bounds.width/2 - widthImageButton/2,
                                y: 6,
                                width: widthImageButton,
@@ -151,7 +138,17 @@ extension FooterView: InfoLabelDelegate {
 
   public func infoLabel(_ infoLabel: InfoLabel, didExpand expanded: Bool) {
     _ = (expanded || infoLabel.fullText.isEmpty) ? removeGradientLayer() : addGradientLayer(gradientColors)
-    self.imageButton.isHidden =  !LightboxConfig.ImageButton.enabled ? true : expanded
+    
+    self.imageButton.isHidden = expanded ? true : self.isImageActionEnabled ? false : true
+    
     delegate?.footerView(self, didExpand: expanded)
   }
+}
+
+extension String {
+    func widthOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.width
+    }
 }

@@ -48,6 +48,15 @@ class ViewController: UIViewController {
         ]
         
         let controller = LightboxController(images: images)
+        
+        let imageButtonAction = controller.footerView.imageButton
+        imageButtonAction.setTitle("self.imageActionTitle self.imageActionTitle", for: .normal)
+        imageButtonAction.layer.cornerRadius = 19.0
+        imageButtonAction.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        imageButtonAction.removeTarget(nil, action: nil, for: .touchUpInside)
+        
+        controller.footerView.isImageActionEnabled = true
+        
         controller.dynamicBackground = true
         
         present(controller, animated: true, completion: nil)

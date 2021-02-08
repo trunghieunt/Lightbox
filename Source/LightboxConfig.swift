@@ -99,7 +99,6 @@ public class LightboxConfig {
   }
     
     public struct ImageButton {
-        public static var enabled = false
         public static var size: CGSize?
         public static var text = NSLocalizedString("Use as avatar", comment: "")
         public static var image: UIImage?
