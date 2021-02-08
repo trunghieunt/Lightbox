@@ -123,7 +123,8 @@ open class FooterView: UIView {
 extension FooterView: LayoutConfigurable {
 
   @objc public func configureLayout() {
-    let widthImageButton = self.imageButton.currentTitle?.widthOfString(usingFont: .systemFont(ofSize: 17.0)) ?? 0 + 20
+    imageButton.sizeToFit()
+    let widthImageButton = self.imageButton.frame.width + 20
     imageButton.frame = CGRect(x: bounds.width/2 - widthImageButton/2,
                                y: 6,
                                width: widthImageButton,
@@ -143,12 +144,4 @@ extension FooterView: InfoLabelDelegate {
     
     delegate?.footerView(self, didExpand: expanded)
   }
-}
-
-extension String {
-    func widthOfString(usingFont font: UIFont) -> CGFloat {
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.width
-    }
 }
